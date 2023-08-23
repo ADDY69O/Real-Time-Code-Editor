@@ -148,3 +148,84 @@ footer a:hover {
     line-height: 1.6;
     padding-top: 20px;
 }
+
+.runBtn{
+    margin-top: 5px;
+    color: white;
+    background-color: red;
+
+}
+/* 
+.bottom{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+.in,.op{
+
+    width: 200px;
+    height: fit-content;
+    min-height: 300px;
+
+   
+
+}
+
+.val.output{
+
+    background-color: red;
+    color: black;
+    min-height: 190px;
+    height: fit-content;
+} */
+
+
+/* Editor.css */
+.editor-container {
+    display: flex;
+  }
+  
+  .editor {
+    flex: 1;
+    margin-right: 90px; /* Add some spacing between editor and input/output */
+  }
+  
+  .bottom {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-section,
+  .output-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-right: 40px;
+  }
+  
+  .input-section p,
+  .output-section p {
+    margin-right: 10px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .input-box,
+  .output-box {
+    border: 1px solid #ccc;
+    padding: 4px;;
+    min-height: 200px;
+    width: 400px;
+    flex: 1;
+  }
+  
+  .input-box {
+    background-color: #f5f5f5; /* Light gray */
+  }
+  
+  .output-box {
+    background-color: #e0f0e0; /* Light green */
+  }
