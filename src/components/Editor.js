@@ -25,7 +25,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
   };
 
   const handleSubmit = async (e) => {
-    const stringWithoutNewlines = code.replace(/\n/g, " ");
+    const stringWithoutNewlines = code;
     const body = {
       code: stringWithoutNewlines,
       lang: selectedLanguage,
@@ -33,7 +33,10 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
     };
 
     const { data } = await axios.post("http://localhost:5000/compile", body);
-
+    if (data.output) {
+      const trimmedOutput = data.output.trim(); // Get the trimmed output
+      data.output = trimmedOutput; // Update the output property
+    }
     setresult(data);
   };
 
@@ -102,7 +105,9 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
           <p>Output</p>
           <div className="output-box">
             {result.output
-              ? JSON.stringify(result.output) // Convert to string if it's an object
+              ? result.output
+                  .split("\r\n")
+                  .map((line, index) => <div key={index}>{line}</div>) // Convert to string if it's an object
               : result.error
               ? result.error
               : ""}
@@ -111,7 +116,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
 
         <div className="language-select">
           <select value={selectedLanguage} onChange={handleLanguageChange}>
-            <option value="javascript">JavaScript</option>
+            <option value="">Select any langauge</option>
             <option value="python">Python</option>
             <option value="java">Java</option>
             <option value="cpp">C++</option>

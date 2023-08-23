@@ -66,6 +66,9 @@ io.on("connection", (socket) => {
         username: userSocketMap[socket.id],
       });
     });
+    compiler.flush(function () {
+      console.log("deleted temp files");
+    });
     delete userSocketMap[socket.id];
     socket.leave();
   });
@@ -79,13 +82,13 @@ app.post("/compile", function (req, res) {
 
     if (lang == "python") {
       if (input.length > 0) {
-        var envData = { OS: "windows" };
+        var envData = { OS: "windows", options: { timeout: 10000 } };
 
         compiler.compilePythonWithInput(envData, code, input, function (data) {
           return res.send(data);
         });
       } else {
-        var envData = { OS: "windows" };
+        var envData = { OS: "windows", options: { timeout: 10000 } };
 
         compiler.compilePython(envData, code, function (data) {
           return res.send(data);
@@ -93,13 +96,21 @@ app.post("/compile", function (req, res) {
       }
     } else if (lang == "cpp") {
       if (input.length > 0) {
-        var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
+        var envData = {
+          OS: "windows",
+          cmd: "g++",
+          options: { timeout: 10000 },
+        }; // (uses g++ command to compile )
         //else
         compiler.compileCPPWithInput(envData, code, input, function (data) {
           return res.send(data);
         });
       } else {
-        var envData = { OS: "windows", cmd: "g++" }; // (uses g++ command to compile )
+        var envData = {
+          OS: "windows",
+          cmd: "g++",
+          options: { timeout: 10000 },
+        }; // (uses g++ command to compile )
         //else
         compiler.compileCPP(envData, code, function (data) {
           return res.send(data);
@@ -109,14 +120,14 @@ app.post("/compile", function (req, res) {
       }
     } else if (lang == "java") {
       if (input.length > 0) {
-        var envData = { OS: "windows" };
+        var envData = { OS: "windows", options: { timeout: 10000 } };
         //else
         compiler.compileJavaWithInput(envData, code, input, function (data) {
           return res.send(data);
         });
       } else {
         //if windows
-        var envData = { OS: "windows" };
+        var envData = { OS: "windows", options: { timeout: 10000 } };
         //else
         compiler.compileJava(envData, code, function (data) {
           return res.send(data);
