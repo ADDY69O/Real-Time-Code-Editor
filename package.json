@@ -1,7 +1,7 @@
 {
   "name": "realtime-editor",
   "engines": {
-    "node": ">=14 <15"
+    "node": ">=16.0.0 <17"
   },
   "version": "0.1.0",
   "private": true,
